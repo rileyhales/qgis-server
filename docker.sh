@@ -5,8 +5,7 @@ docker run \
   -v ./data/:/data:ro \
   -p 5555:5555 \
   -e "QGIS_PROJECT_FILE=/data/project.qgs" \
-  -e "QGIS_PARALLEL_RENDERING=1" \
-  -e "QGIS_MAX_THREADS=8" \
   --init \
   --rm \
+  -d \
   qgis-server
