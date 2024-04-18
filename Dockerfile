@@ -1,7 +1,8 @@
 # Description: Dockerfile for QGIS Server
 # usage: docker build -f Dockerfile -t qgis-server ./
-# reference: https://docs.qgis.org/3.34/en/docs/server_manual/containerized_deployment.html
-#            use --init in docker run command instead of adding tini to the image
+# Dockerfile reference: https://docs.qgis.org/3.34/en/docs/server_manual/containerized_deployment.html
+#                       use --init in docker run command instead of adding tini to the image
+# Server config environment variables reference: https://docs.qgis.org/3.34/en/docs/server_manual/config.html
 
 FROM debian:bookworm-slim
 ENV LANG=en_EN.UTF-8
@@ -24,13 +25,13 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 # QGIS Server environment variables
-# refer to https://docs.qgis.org/3.34/en/docs/server_manual/config.html
 ENV QGIS_PREFIX_PATH /usr
 ENV QGIS_SERVER_LOG_STDERR 1
 ENV QGIS_SERVER_LOG_LEVEL 2
 ENV QGIS_SERVER_PARALLEL_RENDERING 1
 ENV QGIS_SERVER_MAX_THREADS -1
 ENV QGIS_SERVER_IGNORE_BAD_LAYERS 1
+ENV QGIS_SERVER_CACHE_SIZE 20000
 
 # Set users and permissions
 RUN useradd -m qgis
